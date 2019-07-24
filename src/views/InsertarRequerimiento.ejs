@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <% include partials/links%>
+    <title><%=titulo%></title>
+    <style>
+        body {
+            background: #0d47a1;
+        }
+        ul>li{
+            background: #0d47a1 !important;
+            color: white !important;
+        }
+        .dropdown-content li>a, .dropdown-content li>span{
+            color: white !important;
+        }
+
+        .container {
+            margin-top: 25px;
+            border: 1px solid white;
+            padding: 5px;
+        }
+
+        input,
+        label {
+            color: white;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <% include partials/navbar %>
+    <div class="container">
+        <h5 class="center-align white-text">Nueva Hoja de Ruta</h5>
+        <form action="Guardar" class="insertar" method="POST">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="nroRegistro" name="nroRegistro" type="text" class="validate" required >
+                    <label for="nroRegistro">Número de Registro</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Procedencia" name="Procedencia" type="text" class="validate" required>
+                    <label for="Procedencia">Procedencia</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Remitente" name="Remitente" type="text" class="validate" required>
+                    <label for="Remitente">Remitente</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <input id="Cargo Remitente" name="CargoRemitente" type="text" class="validate" required>
+                    <label for="Cargo Remitente">Cargo Remitente</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Adjuntos" name="Adjuntos" type="text" class="validate" required>
+                    <label for="Adjuntos">Adjuntos</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="nroFojas" name="nroFojas" type="text" class="validate" required>
+                    <label for="nroFojas">Numero de Fojas</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Tipo Documento" name="TipoDocumento" type="text" class="validate" required>
+                    <label for="Tipo Documento">Tipo de Documento</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Referencia" name="Referencia" type="text" class="validate" required>
+                    <label for="Referencia">Referencia</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="destino" required>
+                        <option value="" disabled selected>Seleccione el área de Destino</option>
+                        <% for(var i=0; i<areas.length; i++) {%>
+                        <option value="<%=areas[i].id%>"><%=areas[i].area%></option>
+                        <% } %>
+                    </select>
+                    <label>Area de Destino</label>
+                </div>
+                <div class="input-field col s6">
+                    <select multiple name="estado" required>
+                       
+                        <option value="1" selected>Para Su Atención</option>
+                        <option value="2">Preparar Informe</option>
+                        <option value="3">Elaborar Resolucion</option>
+                        <option value="4">Proceder según lo establecido</option>
+                        <option value="5">Hacer Seguimiento</option>
+                        <option value="6">Agendar</option>
+                        <option value="7">Reunión en mi Oficina</option>
+                        <option value="8">Circularizar</option>
+                        <option value="">Coordinar Con</option>
+                        <option value="">Archivo</option>
+                    </select>
+                    <label>Materialize Multiple Select</label>
+                </div>
+                <div class="input-field col s12">
+                    <button type="submit" class="btn blue darken-3">Enviar Hoja de Ruta</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <% include partials/footer %>
+</body>
+
+</html>

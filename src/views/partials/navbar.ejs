@@ -1,0 +1,28 @@
+<nav class="nav-extended">
+    <div class="nav-content center-align blue darken-4">
+        <span class="nav-title">Comité Nacional de la Persona con Discapacidad </span>
+        
+      </div>
+  <div class="nav-wrapper blue darken-4">
+      <%if(usuario != false){%>
+        <a href="#!" class="brand-logo" style="font-size: 17px"><%=usuario%> - <%=area%></a>
+        <%}%>
+   
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/requerimientos/Nuevos">Requerimientos Nuevos</a></li>
+      <li><a href="/requerimientos/Ver">Ver Requerimientos</a></li>
+      <%if(area == 'Secretaria'){%>
+      <li><a href="/requerimientos/Insertar">Insertar Requerimiento</a></li>
+      <%}%>
+      
+      <li>
+        <form action="/login/LogOut" method="POST">
+          <button type="submit" name="salir">Cerrar Sesión</button>
+
+        </form>
+        
+        </li>
+    </ul>
+  </div>
+  
+</nav>
