@@ -35,8 +35,10 @@ class RequerimientoController {
             if (req.session.user) {
                 const resultado = await RequerimientosModel.ObtenerAreas();
                 const areas = <any>resultado[0];
+                const resultadoacciones= await RequerimientosModel.ObtenerAcciones();
+                const acciones = <any>resultadoacciones[0];
 
-                res.render('InsertarRequerimiento', { titulo: "Insertar Requerimiento", usuario: req.session.username, area: req.session.area,areas:areas });
+                res.render('InsertarRequerimiento', { titulo: "Insertar Requerimiento", usuario: req.session.username, area: req.session.area,areas:areas,acciones:acciones });
             } else {
                 req.flash('error', "NECESITA INICIAR SESION");
                 res.redirect('/login');
@@ -46,8 +48,25 @@ class RequerimientoController {
     }
     public async  GuardarRequerimiento(req: Request, res: Response) {
         if (req.session) {
-            console.log(req.body);
-
+            if(req.session.user){
+                const {nroRegistro,Procedencia,Remitente,CargoRemitente,Adjuntos,nroFojas,TipoDocumento,Referencia} = req.body;
+                const resultado  = await RequerimientosModel.GuardarRequerimiento(nroRegistro,Procedencia,Remitente,CargoRemitente,Adjuntos,nroFojas,TipoDocumento,Referencia);
+                const insertId = <any>resultado[0];
+                if(insertId.insertId != null || insertId.insertId != undefined){
+                    req.flash('error', "Hoja de Ruta creada Correctamente");
+                }
+                else{
+                    req.flash('error', "Error al Crear la Hoja de Ruta");
+                }
+                
+                res.redirect('/requerimientos/Insertar');
+            }
+            else{
+                req.flash('error', "NECESITA INICIAR SESION");
+                res.redirect('/login');
+            }
+           
+           
 
         }
     }
