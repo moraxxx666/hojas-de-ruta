@@ -75,14 +75,21 @@ class RequerimientoController {
     public async ListarRequerimientos(req: Request, res: Response){
         if(req.session){
             if(req.session.user){
-                const resultado = await RequerimientosModel.ListarRequerimientos();
-                const requerimientos = <any>resultado[0];
+                const resultado = await RequerimientosModel.ObtenerAreas();
+                const areas = <any>resultado[0];
+                const resultadoacciones= await RequerimientosModel.ObtenerAcciones();
+                const acciones = <any>resultadoacciones[0];
+                
+                const resultado2 = await RequerimientosModel.ListarRequerimientos();
+                const requerimientos = <any>resultado2[0];
                
                 res.render('ListarRequerimientos',{
                     titulo:"Listar Requerimientos",
                     requerimientos:requerimientos,
                     usuario: req.session.username,
-                    area: req.session.area
+                    area: req.session.area,
+                    areas:areas,
+                    acciones:acciones
                 
                 });
                 

@@ -36,14 +36,47 @@
     <% include partials/navbar %>
 
     <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-content">
-              <h4>Modal Header</h4>
-              <p>ID del requerimiento : <span id="idr"></span></p>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-          </div>
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <form action="" method="POST">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select multiple id="areas">
+                            <% for(let i=0;i<areas.length;i++){ %>
+                            <option value="1"> <%=areas[i].area%> </option>
+                            <%}%>
+                        </select>
+                        <label>Materialize Multiple Select</label>
+                    </div>
+                    <div class="input-field col s6">
+                            <select multiple id="acciones">
+                                <% for(let i=0;i<acciones.length;i++){ %>
+                            <option value="1"> <%=acciones[i].accion%> </option>
+                            <%}%>
+                            </select>
+                            <label>Materialize Multiple Select</label>
+                    </div>
+                    <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Textarea</label>
+                    </div>
+                    <div class="input-field-col s12">
+                        <div class="row">
+                            <div class="col s12"><button class="btn" style="width: 100%;" type="submit">Guardar</button></div>
+                            <div class="col s12"><button class="btn red"  style="width: 100%;" type="reset" >Limpiar</button></div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
+    </div>
 
 
 
@@ -66,43 +99,44 @@
 
             <tbody class="white-text">
                 <% for(let i = 0; i<requerimientos.length;i++){%>
-                <tr>
-                    <td><%=requerimientos[i].numero_registro%></td>
-                    <td><%=requerimientos[i].procedencia%></td>
-                    <td><%=requerimientos[i].remitente%></td>
-                    <td><%=requerimientos[i].cargo_remitente%></td>
-                    <td><%=requerimientos[i].adjuntos%></td>
-                    <td><%=requerimientos[i].nro_fojas%></td>
-                    <td><%=requerimientos[i].tipo_de_documento%></td>
-                    <td><%=requerimientos[i].referencia%></td>
-                    <td><%=requerimientos[i].fecha_ingreso.toLocaleString()%></td>
-                    <td><%=requerimientos[i].revisado_mae%></td>
-                    <%if(area =='Direccion Ejecutiva'){%>
-                        <td> <a onclick="asignarIDModal( '<%=requerimientos[i].id_requerimiento%>')" class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
-                    <%}%>
+                            <tr>
+                                <td><%=requerimientos[i].numero_registro%></td>
+                                <td><%=requerimientos[i].procedencia%></td>
+                                <td><%=requerimientos[i].remitente%></td>
+                                <td><%=requerimientos[i].cargo_remitente%></td>
+                                <td><%=requerimientos[i].adjuntos%></td>
+                                <td><%=requerimientos[i].nro_fojas%></td>
+                                <td><%=requerimientos[i].tipo_de_documento%></td>
+                                <td><%=requerimientos[i].referencia%></td>
+                                <td><%=requerimientos[i].fecha_ingreso.toLocaleString()%></td>
+                                <td><%=requerimientos[i].revisado_mae%></td>
+                                <%if(area =='Direccion Ejecutiva'){%>
+                                <td> <a onclick="asignarIDModal( '<%=requerimientos[i].id_requerimiento%>')"
+                                        class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
+                                <%}%>
                 </tr>
                 <%}%>
-            </tbody>
-       
+                                </tbody>
 
 
 
-       
-    </table>
-    </div>
 
 
-    <% include partials/footer %>
+                                </table>
+                    </div>
+
+
+                    <% include partials/footer %>
 </body>
 
 <script>
 
-function asignarIDModal(valor){
-    let id_requerimiento = null;
-    //window.alert(valor);
-    let idr = document.getElementById('idr');
-    idr.innerHTML = valor;
-}
+    function asignarIDModal(valor) {
+        let id_requerimiento = null;
+        //window.alert(valor);
+        let idr = document.getElementById('idr');
+        idr.innerHTML = valor;
+    }
 </script>
 
 </html>
