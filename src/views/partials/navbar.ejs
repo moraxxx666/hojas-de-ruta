@@ -9,12 +9,19 @@
         <%}%>
    
     <ul class="right hide-on-med-and-down">
-      <li><a href="/requerimientos/Nuevos">Requerimientos Nuevos</a></li>
-      <li><a href="/requerimientos/Ver">Ver Requerimientos</a></li>
-      <%if(area == 'Secretaria'){%>
-      <li><a href="/requerimientos/Insertar">Insertar Requerimiento</a></li>
-      <%}%>
+        <%if(area != 'Secretaria' && area !== 'Direccion Ejecutiva'){%>
+          <li><a href="/requerimientos/Pendientes">Requerimientos Pendientes</a></li>
+          <li><a href="/requerimientos/Historial">Historial de Requerimientos</a></li>
+          <%}%>
       
+      <%if(area == 'Secretaria'){%>
+      <li><a href="/requerimientos/Crear">Crear Requerimiento</a></li>
+      <li><a href="/requerimientos/Listar">Listar Requerimiento</a></li>
+      <%}%>
+      <%if(area == 'Direccion Ejecutiva'){%>
+        <li><a href="/requerimientos/Nuevos">Nuevos Requerimiento</a></li>
+        <li><a href="/requerimientos/Seguimiento">Seguimiento de  Requerimiento</a></li>
+        <%}%>
       <li>
         <form action="/login/LogOut" method="POST">
           <button type="submit" name="salir">Cerrar Sesión</button>

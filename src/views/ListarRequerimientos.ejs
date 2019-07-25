@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <% include partials/links%>
+    <title><%=titulo%></title>
+    <style>
+        body {
+            background: #0d47a1;
+        }
+
+        .etiqueta {
+            font-size: 20px;
+        }
+
+        span {
+            margin-top: 15px;
+        }
+
+        .carta {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 200px;
+            overflow: auto;
+            border: 2px solid black;
+            color: white;
+            background: #1565c0;
+        }
+    </style>
+</head>
+
+<body>
+    <% include partials/navbar %>
+
+    <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4>Modal Header</h4>
+              <p>ID del requerimiento : <span id="idr"></span></p>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+          </div>
+
+
+
+    <h5 class="center align white-text">Historial de Requerimientos</h5>
+    <div class="container2">
+        <table class="highlight centered">
+            <thead class="white-text">
+                <th>Número de Registro</th>
+                <th>Procedencia</th>
+                <th>Remitente</th>
+                <th>Cargo Remitente</th>
+                <th>Adjuntos</th>
+                <th>Número de fojas</th>
+                <th>Tipo de Documento</th>
+                <th>Referencia</th>
+                <th>Fecha de Ingreso</th>
+                <th>Revisado por MAE</th>
+            </thead>
+
+
+            <tbody class="white-text">
+                <% for(let i = 0; i<requerimientos.length;i++){%>
+                <tr>
+                    <td><%=requerimientos[i].numero_registro%></td>
+                    <td><%=requerimientos[i].procedencia%></td>
+                    <td><%=requerimientos[i].remitente%></td>
+                    <td><%=requerimientos[i].cargo_remitente%></td>
+                    <td><%=requerimientos[i].adjuntos%></td>
+                    <td><%=requerimientos[i].nro_fojas%></td>
+                    <td><%=requerimientos[i].tipo_de_documento%></td>
+                    <td><%=requerimientos[i].referencia%></td>
+                    <td><%=requerimientos[i].fecha_ingreso.toLocaleString()%></td>
+                    <td><%=requerimientos[i].revisado_mae%></td>
+                    <%if(area =='Direccion Ejecutiva'){%>
+                        <td> <a onclick="asignarIDModal( '<%=requerimientos[i].id_requerimiento%>')" class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
+                    <%}%>
+                </tr>
+                <%}%>
+            </tbody>
+       
+
+
+
+       
+    </table>
+    </div>
+
+
+    <% include partials/footer %>
+</body>
+
+<script>
+
+function asignarIDModal(valor){
+    let id_requerimiento = null;
+    //window.alert(valor);
+    let idr = document.getElementById('idr');
+    idr.innerHTML = valor;
+}
+</script>
+
+</html>

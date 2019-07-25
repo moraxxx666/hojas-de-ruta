@@ -10,6 +10,7 @@ class RequerimientoController {
         if (req.session) {
 
             if (req.session.user) {
+                console.log(req.session.user);
                 res.render('NuevosRequerimientos', { titulo: "Requerimientos Nuevos", usuario: req.session.username, area: req.session.area });
             } else {
                 req.flash('error', "NECESITA INICIAR SESION");
@@ -59,7 +60,7 @@ class RequerimientoController {
                     req.flash('error', "Error al Crear la Hoja de Ruta");
                 }
                 
-                res.redirect('/requerimientos/Insertar');
+                res.redirect('/requerimientos/Crear');
             }
             else{
                 req.flash('error', "NECESITA INICIAR SESION");
@@ -68,6 +69,29 @@ class RequerimientoController {
            
            
 
+        }
+    }
+
+    public async ListarRequerimientos(req: Request, res: Response){
+        if(req.session){
+            if(req.session.user){
+                const resultado = await RequerimientosModel.ListarRequerimientos();
+                const requerimientos = <any>resultado[0];
+               
+                res.render('ListarRequerimientos',{
+                    titulo:"Listar Requerimientos",
+                    requerimientos:requerimientos,
+                    usuario: req.session.username,
+                    area: req.session.area
+                
+                });
+                
+                
+            }
+            else{
+                req.flash('error', "NECESITA INICIAR SESION");
+                res.redirect('/login');
+            }
         }
     }
 

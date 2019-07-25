@@ -24,7 +24,15 @@ class LoginController {
                 req.session.user = usuario[0].id;
                 req.session.username = usuario[0].username;
                 req.session.area = usuario[0].area;
-                res.redirect('/requerimientos/Nuevos');
+                if(req.session.area == 'Secretaria' || req.session.area == 'Direccion Ejecutiva')
+                {
+                    res.redirect('/requerimientos/Listar');
+                    
+                }
+                else{
+                    res.redirect('/requerimientos/Nuevos');
+                }
+                
             }
         }
         else {

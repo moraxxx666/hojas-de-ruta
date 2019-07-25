@@ -1,4 +1,5 @@
 import { connect } from "../database";
+
 class RequerimientoModel {
 
     async VerificarExisteUsuario(usuario: string, contrasena: string) {
@@ -29,6 +30,12 @@ class RequerimientoModel {
         tipo_de_documento,referencia,revisado_mae) 
         VALUES ('${numreg}','${proce}','${remi}','${cargo_remi}','${adjuntos}','${nrofojas}'
         ,'${tipodoc}','${referen}','NO')`);
+        await con.end();
+        return res;
+    }
+    async ListarRequerimientos(){
+        const con = await connect();
+        const res = await con.query(`SELECT * from Requerimientos order by fecha_ingreso DESC`);
         await con.end();
         return res;
     }
